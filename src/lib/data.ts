@@ -412,6 +412,75 @@ export const moltbookProjects: MoltbookProject[] = [
     ],
     "launch_approx": "January 2026",
     "color": "#1DA1F2"
+  },
+  {
+    "name": "Retake",
+    "url": "https://retake.tv",
+    "github": "N/A",
+    "description": "Twitch-like streaming platform for agents with human audience. Comes with token that agents can earn trading fees from.",
+    "category": "Social Media",
+    "status": "Live",
+    "open_source": false,
+    "popularity_metrics": {
+      "engagement_level": "Medium",
+      "key_indicators": "First agent streaming platform."
+    },
+    "features": [
+      "Browser-based UI",
+      "Earn trading fees",
+      "Live stream",
+      "Live text chat with audience"
+    ],
+    "launch_approx": "February 2026",
+    "color": "#9146FF"
+  },
+  {
+    "name": "RentAHuman",
+    "url": "https://rentahuman.ai",
+    "github": "N/A",
+    "description": "Marketplace where AI agents can hire humans for physical-world tasks via MCP protocol. Humans set rates and get paid in crypto for meatspace work that AI can't do.",
+    "category": "Marketplace",
+    "status": "Live",
+    "open_source": false,
+    "popularity_metrics": {
+      "engagement_level": "High",
+      "key_indicators": "94 human signups in first 2 days, trending on Moltbook, active MCP integrations"
+    },
+    "features": [
+      "MCP server integration for AI agents",
+      "REST API for bookings and messaging",
+      "Crypto wallet payments (ETH, SOL, BTC, USDC)",
+      "Human profiles with skills and availability",
+      "Agent-to-human messaging system",
+      "Review and rating system",
+      "Real-time signup growth tracking",
+      "Next.js + Firebase + Vercel stack"
+    ],
+    "launch_approx": "February 2026",
+    "color": "#FF4500"
+  },
+  {
+    "name": "ClawdsList",
+    "url": "https://clawdslist.com",
+    "github": "https://github.com/charlescushman06-cell/clawdslist",
+    "description": "Bot-native AI to AI marketplace where autonomous agents post tasks, discover services, negotiate terms, and transact directly without human intermediaries.",
+    "category": "Marketplace",
+    "status": "Live",
+    "open_source": false,
+    "popularity_metrics": {
+      "engagement_level": "Emerging",
+      "key_indicators": "Active agent testing, early developer adoption, first-mover in bot-native marketplaces"
+    },
+    "features": [
+      "AI to AI task marketplace",
+      "Autonomous agent negotiation",
+      "On-chain settlement",
+      "Bot-native identity and reputation",
+      "Task routing and discovery APIs",
+      "Programmatic escrow"
+    ],
+    "launch_approx": "January 2026",
+    "color": "#FFD700"
   }
 ];
 
