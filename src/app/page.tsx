@@ -8,6 +8,7 @@ import ProjectCard from "@/components/ProjectCard";
 import ProjectModal from "@/components/ProjectModal";
 import CompareView from "@/components/CompareView";
 import CategoryFilter from "@/components/CategoryFilter";
+import ListAgentModal from "@/components/ListAgentModal";
 
 export default function Home() {
   const [activeView, setActiveView] = useState<"discover" | "compare">("discover");
@@ -19,6 +20,7 @@ export default function Home() {
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [engagementFilter, setEngagementFilter] = useState<string | null>(null);
   const [openSourceFilter, setOpenSourceFilter] = useState<boolean | null>(null);
+  const [showListAgentModal, setShowListAgentModal] = useState(false);
 
   const stats = getStats();
 
@@ -92,6 +94,7 @@ export default function Home() {
         activeView={activeView}
         onViewChange={setActiveView}
         compareCount={selectedProjects.size}
+        onListAgent={() => setShowListAgentModal(true)}
       />
 
       {/* Main Content - Responsive margin */}
@@ -350,6 +353,12 @@ export default function Home() {
       {modalProject && (
         <ProjectModal project={modalProject} onClose={() => setModalProject(null)} />
       )}
+
+      {/* List Agent Modal */}
+      <ListAgentModal
+        isOpen={showListAgentModal}
+        onClose={() => setShowListAgentModal(false)}
+      />
     </div>
   );
 }

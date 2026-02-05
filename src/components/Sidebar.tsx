@@ -7,9 +7,10 @@ interface SidebarProps {
   activeView: "discover" | "compare";
   onViewChange: (view: "discover" | "compare") => void;
   compareCount: number;
+  onListAgent: () => void;
 }
 
-export default function Sidebar({ activeView, onViewChange, compareCount }: SidebarProps) {
+export default function Sidebar({ activeView, onViewChange, compareCount, onListAgent }: SidebarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -102,15 +103,16 @@ export default function Sidebar({ activeView, onViewChange, compareCount }: Side
           </button>
 
           {/* List your Agent Button */}
-          <a
-            href="https://x.com/messages/compose?recipient_id=Param_eth"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => {
+              onListAgent();
+              setMobileMenuOpen(false);
+            }}
             className="w-full flex items-center gap-3 px-4 py-3 rounded-none font-mono text-sm uppercase tracking-wider bg-[#FF69B4] text-black font-bold hover:bg-[#FF85C1] transition-all mt-4"
           >
             <Plus className="w-5 h-5" />
             List your Agent
-          </a>
+          </button>
         </nav>
 
         {/* Footer */}
