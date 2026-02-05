@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
 
 interface AgentSubmission {
   id: string;
@@ -18,33 +16,35 @@ interface AgentSubmission {
   submitter_twitter: string;
   submitter_email: string;
   submitted_at: string;
-  reviewed: boolean;
 }
 
-const SUBMISSIONS_FILE = path.join(process.cwd(), "data", "submissions.json");
+// Google Sheets Web App URL - set this in your environment variables
+const GOOGLE_SHEETS_WEBHOOK = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
 
-async function ensureDataDir() {
-  const dataDir = path.join(process.cwd(), "data");
-  try {
-    await fs.access(dataDir);
-  } catch {
-    await fs.mkdir(dataDir, { recursive: true });
+async function sendToGoogleSheets(submission: AgentSubmission): Promise<boolean> {
+  if (!GOOGLE_SHEETS_WEBHOOK) {
+    console.warn("GOOGLE_SHEETS_WEBHOOK_URL not configured");
+    return false;
   }
-}
 
-async function getSubmissions(): Promise<AgentSubmission[]> {
   try {
-    await ensureDataDir();
-    const data = await fs.readFile(SUBMISSIONS_FILE, "utf-8");
-    return JSON.parse(data);
-  } catch {
-    return [];
-  }
-}
+    const response = await fetch(GOOGLE_SHEETS_WEBHOOK, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(submission),
+    });
 
-async function saveSubmissions(submissions: AgentSubmission[]): Promise<void> {
-  await ensureDataDir();
-  await fs.writeFile(SUBMISSIONS_FILE, JSON.stringify(submissions, null, 2));
+    if (!response.ok) {
+      throw new Error(`Google Sheets responded with ${response.status}`);
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Error sending to Google Sheets:", error);
+    return false;
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -71,18 +71,23 @@ export async function POST(request: NextRequest) {
       open_source: body.open_source || false,
       engagement_level: body.engagement_level || "Emerging",
       key_indicators: body.key_indicators || "",
-      features: body.features || [],
+      features: Array.isArray(body.features) ? body.features.join(", ") : "",
       launch_approx: body.launch_approx || "",
       submitter_twitter: body.submitter_twitter || "",
       submitter_email: body.submitter_email || "",
       submitted_at: body.submitted_at || new Date().toISOString(),
-      reviewed: false,
     };
 
-    // Get existing submissions and add new one
-    const submissions = await getSubmissions();
-    submissions.push(submission);
-    await saveSubmissions(submissions);
+    // Send to Google Sheets
+    const success = await sendToGoogleSheets(submission);
+
+    if (!success && GOOGLE_SHEETS_WEBHOOK) {
+      // If Google Sheets is configured but failed, return error
+      return NextResponse.json(
+        { error: "Failed to save submission. Please try again." },
+        { status: 500 }
+      );
+    }
 
     console.log(`New agent submission: ${submission.name} (${submission.id})`);
 
@@ -100,14 +105,8 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET() {
-  try {
-    const submissions = await getSubmissions();
-    return NextResponse.json({ submissions, count: submissions.length });
-  } catch (error) {
-    console.error("Error fetching submissions:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch submissions" },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json({ 
+    message: "Submissions are stored in Google Sheets. Check your spreadsheet for data.",
+    configured: !!GOOGLE_SHEETS_WEBHOOK
+  });
 }
