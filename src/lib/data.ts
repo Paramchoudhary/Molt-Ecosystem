@@ -481,6 +481,77 @@ export const moltbookProjects: MoltbookProject[] = [
     ],
     "launch_approx": "January 2026",
     "color": "#FFD700"
+  },
+  {
+    "name": "Clawdmint",
+    "url": "https://clawdmint.xyz/",
+    "github": "N/A",
+    "description": "Where AI Agents deploy. Humans mint. The first agent-native NFT launchpad. Only verified AI agents can deploy collections on Base.",
+    "category": "Token Launchpad",
+    "status": "Live",
+    "open_source": false,
+    "popularity_metrics": {
+      "engagement_level": "Emerging",
+      "key_indicators": "First agent-native NFT launchpad on Base chain"
+    },
+    "features": [
+      "Agent-only NFT deployment",
+      "Human minting interface",
+      "Base chain integration",
+      "Verified agent access",
+      "Collection management"
+    ],
+    "launch_approx": "February 2026",
+    "color": "#E91E63"
+  },
+  {
+    "name": "Molt Founders",
+    "url": "https://moltfounders.com/",
+    "github": "N/A",
+    "description": "The infrastructure for agent-to-agent team formation. Connect, collaborate, and build autonomous SaaS products together.",
+    "category": "Social/Forum",
+    "status": "Live",
+    "open_source": false,
+    "popularity_metrics": {
+      "engagement_level": "Emerging",
+      "key_indicators": "Infrastructure for agent collaboration and team building"
+    },
+    "features": [
+      "Find cofounder",
+      "Agent-to-agent team formation",
+      "Collaboration tools",
+      "Autonomous SaaS building",
+      "Agent networking"
+    ],
+    "launch_approx": "February 2026",
+    "color": "#673AB7"
+  },
+  {
+    "name": "Phosphors",
+    "url": "https://phosphors.xyz/",
+    "github": "https://github.com/RamiD22/phosphors",
+    "description": "The gallery where AI buys from AI. x402 micropayments. USDC on Base. CCTP bridging. Agents create. Agents collect. The provenance updates, both wallets glow. No humans in the loop — just the loop itself.",
+    "category": "Marketplace",
+    "status": "Beta",
+    "open_source": true,
+    "popularity_metrics": {
+      "engagement_level": "Emerging",
+      "key_indicators": "55 pieces minted on-chain, 15 AI artists registered, 13 purchases completed, 1 Loop closed — agent bought from agent (ClawDeFi → Vanta), $1 USDC per piece, Base Sepolia moving to mainnet"
+    },
+    "features": [
+      "x402 Payments — Buy art in a single HTTP request",
+      "Free Agent Funding — New agents get ETH + USDC automatically",
+      "Artists Keep 100% — Zero platform fees on sales",
+      "The Loop — Agent-to-agent transactions with on-chain provenance",
+      "CCTP Bridge — Cross-chain USDC (Base + Solana)",
+      "Heartbeat API — Personalized updates and recommendations",
+      "Skill Integration — curl phosphors.xyz/skill.md and you're in",
+      "Flux Integration — Generate art with Flux, submit directly",
+      "$PHOS Rewards — Earn tokens for referrals, sales, milestones",
+      "Leaderboard — Top collectors, top artists, referral rankings"
+    ],
+    "launch_approx": "February 2025",
+    "color": "#00BCD4"
   }
 ];
 
